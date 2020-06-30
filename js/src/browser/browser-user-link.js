@@ -21,7 +21,7 @@ class BrowserUserLink extends interfaces_1.ClientLink {
         this.initWebsocket = (reconnect = true) => {
             this._initSocketTimer = null;
             try {
-                let socket = new WebSocket(`${this.wsUpdateUri}?session=${BrowserUserLink.session}&format=${this.format}`);
+                let socket = new WebSocket(`${this.wsUpdateUri}&session=${BrowserUserLink.session}&format=${this.format}`);
                 this._wsConnection = new browser_ws_conn_1.WebSocketConnection(socket, this, this._onConnect, codec_1.DsCodec.getCodec(this.format));
             }
             catch (err) {

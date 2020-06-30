@@ -75,7 +75,7 @@ export class BrowserUserLink extends ClientLink {
     this._initSocketTimer = null;
 
     try {
-      let socket = new WebSocket(`${this.wsUpdateUri}?session=${BrowserUserLink.session}&format=${this.format}`);
+      let socket = new WebSocket(`${this.wsUpdateUri}&session=${BrowserUserLink.session}&format=${this.format}`);
       this._wsConnection = new WebSocketConnection(socket, this, this._onConnect, DsCodec.getCodec(this.format));
     } catch (err) {
       this.onDisConnect(reconnect);

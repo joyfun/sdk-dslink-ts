@@ -1,8 +1,16 @@
 // const {DSLink} = require('dslink/js/web');
 const {DSLink} = require('../../js/web');
+const {PrivateKey}=require('../../js/src/crypto/pk')
+import axios from 'axios';
 
-async function main() {
-    let link = new DSLink('ws://localhost:8080/ws', 'json');
+async function main(data) {
+    let dsId = data.dsId;
+    let auth =  data.auth;
+    let url='ws://localhost:8080/ws?auth='+auth+'&dsId='+dsId;
+    console.log(url);
+    let link = new DSLink(url, 'json');
+  
+
     link.connect();
 
     let {requester} = link;
@@ -19,5 +27,9 @@ async function main() {
             .result.log
     );
 }
+axios.get('http://localhost:8080/jsconn')
+  .then(function (response) {
+    main(response.data);
+  })
 
-main();
+//main();
